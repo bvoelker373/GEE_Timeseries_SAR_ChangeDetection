@@ -3,6 +3,8 @@
 1) Run Iratio_ChangeDetect_GenCSV.py
 2) Run Iratio_ChangeDetect_Process_CSV.py
 
+Requires use of an Earth Engine account.
+
 Variables may be changed to suit desired area of interest. For example, input different Earth Engine geometry/asset to run over a different area. Or change the intitial time and step sizes to run the time series over different intervals.
 
 ***********
