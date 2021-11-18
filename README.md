@@ -3,12 +3,13 @@
 1) Run Iratio_ChangeDetect_GenCSV.py
 2) Run Iratio_ChangeDetect_Process_CSV.py
 
-⋅⋅* Variables may be changed to suit desired area of interest. For example, input different Earth Engine geometry/asset to run over a different area. Or change the intitial time and step sizes to run the time series over different intervals.
-⋅⋅* ChangeDetect.py only contains a function which is referenced by GenCSV script, so no need to run separately. This function is adapted from Handweger et al. (2021). See below:
+⋅Variables may be changed to suit desired area of interest. For example, input different Earth Engine geometry/asset to run over a different area. Or change the intitial time and step sizes to run the time series over different intervals.
+
+***********
+ChangeDetect.py only contains a function which is referenced by GenCSV script, so no need to run separately. This function is adapted from Handweger et al. (2021). See below:
 
 Handwerger, A. L., Jones, S. Y., Amatya, P., Kerner, H. R., Kirschbaum, D. B., and Huang, M.-H.: Strategies for landslide detection using open-access synthetic aperture radar backscatter change in Google Earth Engine, Nat. Hazards Earth Syst. Sci. Discuss. [preprint], https://doi.org/10.5194/nhess-2021-283, in review, 2021.
 
-***********
 MIT License
 
 Copyright (c) 2021 Mong-Han Huang and Alexander L. Handwerger
