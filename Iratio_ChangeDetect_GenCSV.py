@@ -1,6 +1,6 @@
 # Initialize Earth Engine Python API.
 import ee
-#ee.Authenticate()
+ee.Authenticate()
 ee.Initialize()
 
 # For data manipulation and analysis.
