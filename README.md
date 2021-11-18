@@ -1,1 +1,3 @@
-# GEE_Timeseries_SAR_ChangeDetection
+# How to use:
+
+1) Run 
