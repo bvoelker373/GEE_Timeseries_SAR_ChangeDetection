@@ -201,9 +201,9 @@ exportToCSV_count = ee.batch.Export.table.toDrive(collection = countPerZone,
                                             fileFormat = 'CSV')
 
 
-"""Uncomment to start Earth Engine export."""
-#exportToCSV_sum.start()
-#exportToCSV_count.start()
+"""Start Earth Engine export."""
+exportToCSV_sum.start()
+exportToCSV_count.start()
 
 # Export the window dates to a CSV.
 window_df = WindowDate_to_DFandCSV(windowTimes_7day, 7)
