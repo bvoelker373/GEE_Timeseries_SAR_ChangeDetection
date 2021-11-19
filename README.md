@@ -1,7 +1,7 @@
 # Purpose
 These scripts use Google Earth Engine to process SAR data from the ESA Sentinel-1 satellite platform for the purpose of change detection of the Earth's surface. Two stacks of SAR intensity images are created that cover two different periods of time. The time period between the stacks is effectively the 'detection window' where, if a change occurs, it will be detected by the algorithm. 
 
-The median of each stack is calculated, which reduces noise and creates two images: one from the 'before' stack, and one from the 'after' stack. The ratio of the before and after stacks is calculated. Since GEE S1 GRD data is in decibels, simply subtracting the two images is an equivalent operation to taking the ratio.
+The median of each stack is found, which reduces noise and creates two images: one from the 'before' stack, and one from the 'after' stack. The ratio of the before and after stacks is then calculated. Since GEE S1 GRD data is in decibels, simply subtracting the two images is an equivalent operation to taking the ratio.
 
 The ratio of the SAR intensity images is used to find areas of change -- larger changes in ground surface properties will create a larger ratio. This creates an intensity ratio image. Then a percentile threshold of the intensity ratio image is applied, where any pixels higher than the threshold are classified as a change. Handweger et al. (2021) found that for landslide detection, using the 99th percentile minimized false positives.
 
