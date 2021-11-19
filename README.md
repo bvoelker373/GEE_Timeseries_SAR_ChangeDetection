@@ -5,7 +5,9 @@
 
 Requires use of an Earth Engine account.
 
-If GEE export fails, it is likely because there are no images at the beginning of the time series. Try increasing the
+If GEE export fails, it is likely because there are no images at the beginning of the time series. Try a later start date.
+
+Recommended polygon tile spacing is 500m. Earth Engine may run out of memory with smaller tiles.
 
 Variables may be changed to suit desired area of interest. For example, input different Earth Engine geometry/asset to run over a different area. Or change the intitial time and step sizes to run the time series over different intervals.
 
