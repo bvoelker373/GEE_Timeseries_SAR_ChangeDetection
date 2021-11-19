@@ -1,10 +1,9 @@
 # Purpose
-Ratio of two SAR backscattered intensity images can be used to detect changes of ground surface properties.
-Create stacks of many SAR images before and after event to reduce noise.
-Moving the time period between images (detection window) allows time series to be constructed.
-Finding anomalies or peaks in time series could pinpoint landslide events of interest.
-Use Google Earth Engine to handle large volumes of data.
-![image](https://user-images.githubusercontent.com/94650022/142574427-22312724-5cc3-43f1-8fb9-e730d5e1e2ec.png)
+These scripts use Google Earth Engine to process SAR data from the ESA Sentinel-1 satellite platform for the purpose of change detection of the Earth's surface. Two stacks of SAR intensity images are created that cover two different periods of time. The time period between the stacks is effectively the 'detection window' where, if a change occurs, it will be detected by the algorithm. 
+
+The median of each stack is calculated, which reduces noise and two images: one from the 'before' stack, and one from the 'after' stack. The ratio of the before and after stacks is calculated. Since GEE S1 GRD data is in decibels, simply subtracting the two images is an equivalent operation to taking the ratio.
+
+The ratio of the SAR intensity images is used to find areas of change -- larger changes in ground surface properties will create a larger ratio.
 
 # How to use
 
