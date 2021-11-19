@@ -12,7 +12,7 @@ Recommended polygon tile spacing is 500m. Earth Engine may run out of memory wit
 Variables may be changed to suit desired area of interest. For example, input different Earth Engine geometry/asset to run over a different area. Or change the intitial time and step sizes to run the time series over different intervals.
 
 ***********
-ChangeDetect.py  contains a function which is adapted from Handweger et al. (2021):
+ChangeDetect.py  contains a SAR intensity ratio change detection function which is adapted from Handweger et al. (2021):
 
 Handwerger, A. L., Jones, S. Y., Amatya, P., Kerner, H. R., Kirschbaum, D. B., and Huang, M.-H.: Strategies for landslide detection using open-access synthetic aperture radar backscatter change in Google Earth Engine, Nat. Hazards Earth Syst. Sci. Discuss. [preprint], https://doi.org/10.5194/nhess-2021-283, in review, 2021.
 
