@@ -311,15 +311,16 @@ for i, ax in enumerate(axes.flatten()):
         
         ax.plot(windows['Time'][peak_index[0]], currentData[peak_index[0]], 'ro')
         ax.legend()
-"""Uncomment to save figure"""
-#plt.savefig('normalized_99Ptl_timeseries_HF.png')
+# Save time series figure.
+plt.savefig('normalized_99Ptl_timeseries_HF.png')
 
 plt.show()
 
 
 # Get an image of every cell with a detected change before and after the detection date.
-"""Uncomment to start export to Google Drive"""
-#[Get_BeforeAfter_Imagery(ID, date, grid, sizeWindows) for ID, date in zip(detection_ID_list, detection_date_list)]
+"""Will begin export of (potentially on the order of 10-100) images to Google Drive
+Comment out the line below if export is not desired."""
+[Get_BeforeAfter_Imagery(ID, date, grid, sizeWindows) for ID, date in zip(detection_ID_list, detection_date_list)]
 
 # Get NDVI of every cell with a detected change before and after the detection date.
 pre_NDVI = []
