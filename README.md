@@ -1,7 +1,8 @@
 # How to use:
 
 1) Run Iratio_ChangeDetect_GenCSV.py
-2) Run Iratio_ChangeDetect_Process_CSV.py
+2) Wait for Google Earth Engine to export the two CSVs at the end of the code (could take more than 1 hour).
+3) Run Iratio_ChangeDetect_Process_CSV.py
 
 Requires use of an Earth Engine account.
 
@@ -9,7 +10,7 @@ If GEE export fails, it is likely because there are no images at the beginning o
 
 Recommended polygon tile spacing is 500m. Earth Engine may run out of memory with smaller tiles.
 
-Variables may be changed to suit desired area of interest. For example, input different Earth Engine geometry/asset to run over a different area. Or change the intitial time and step sizes to run the time series over different intervals.
+Variables may be changed to suit desired area of interest. For example, input different Earth Engine geometry/asset to run over a different area. Or change the intitial time and step sizes to run the time series over different intervals. Ensure that any variables shared between the two Python scripts are the same.
 
 ***********
 ChangeDetect.py  contains a SAR intensity ratio change detection function which is adapted from Handweger et al. (2021):
