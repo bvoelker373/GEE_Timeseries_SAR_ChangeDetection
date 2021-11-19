@@ -1,4 +1,12 @@
-# How to use:
+# Purpose
+Ratio of two SAR backscattered intensity images can be used to detect changes of ground surface properties.
+Create stacks of many SAR images before and after event to reduce noise.
+Moving the time period between images (detection window) allows time series to be constructed.
+Finding anomalies or peaks in time series could pinpoint landslide events of interest.
+Use Google Earth Engine to handle large volumes of data.
+![image](https://user-images.githubusercontent.com/94650022/142574427-22312724-5cc3-43f1-8fb9-e730d5e1e2ec.png)
+
+# How to use
 
 1) Run Iratio_ChangeDetect_GenCSV.py
 2) Wait for Google Earth Engine to export the two CSVs at the end of the code (could take more than 1 hour).
