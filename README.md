@@ -3,7 +3,13 @@ These scripts use Google Earth Engine to process SAR data from the ESA Sentinel-
 
 The median of each stack is calculated, which reduces noise and two images: one from the 'before' stack, and one from the 'after' stack. The ratio of the before and after stacks is calculated. Since GEE S1 GRD data is in decibels, simply subtracting the two images is an equivalent operation to taking the ratio.
 
-The ratio of the SAR intensity images is used to find areas of change -- larger changes in ground surface properties will create a larger ratio.
+The ratio of the SAR intensity images is used to find areas of change -- larger changes in ground surface properties will create a larger ratio. This creates an intensity ratio image. Then a percentile threshold of the intensity ratio image is applied, where any pixels higher than the threshold are classified as a change. Handweger et al. (2021) found that for landslide detection, using the 99th percentile minimized false positives.
+
+The input area of interest (Earth Engine geometry) is used to create a grid of rectangular polygon tiles. For each tile, the percentage of pixels over the value 99th percentile is calculated.
+
+Next, this change detection process is repeated by moving the detection window and the dates of the stacks forward by a set amount of time. The result is a time series, for each cell, of percent area cover by pixels over the 99th percentile value.
+
+Finally, for each time series, peak detection is applied to find points where the time series had a sharp increase, which corresponds to a time when the intensity ratio rises noticably. For efficiency, repeat detections from the same event are ignored and a baseline percent pixel threshold is applied to avoid false detections from random noise. A list of all cells with detections, and the date of detections, is recorded. This list is used to generate an optical satellite image of the area before/after the event, and the average NDVI of the area before/after the event. 
 
 # How to use
 
