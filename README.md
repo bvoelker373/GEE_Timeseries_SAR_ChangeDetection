@@ -9,7 +9,7 @@ The input area of interest (Earth Engine geometry) is used to create a grid of r
 
 Next, this change detection process is repeated by moving the detection window and the dates of the stacks forward by a set amount of time. The result is a time series, for each cell, of percent area cover by pixels over the 99th percentile value.
 
-Finally, for each time series, peak detection is applied to find points where the time series had a sharp increase, which corresponds to a time when the intensity ratio rises noticably. For efficiency, repeat detections from the same event are ignored and a baseline percent pixel threshold is applied to avoid false detections from random noise. A list of all cells with detections, and the date of detections, is recorded. This list is used to generate an optical satellite image of the area before/after the event, and the average NDVI of the area before/after the event. 
+Finally, for each time series, peak detection is applied to find points where the time series had a sharp increase, meaning the intensity ratio rises from a change on the ground. For efficiency, repeat detections from the same event are ignored and a baseline percent pixel threshold is applied to avoid false detections from random noise. A list of all cells with detections, and the date of detections, is recorded. This list is used to generate an optical satellite image of the area before/after the event, and the average NDVI of the area before/after the event. 
 
 # How to use
 
