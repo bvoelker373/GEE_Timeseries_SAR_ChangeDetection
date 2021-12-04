@@ -102,19 +102,6 @@ def I_Ratio(aoi, slope_threshold, curv_threshold,
                                       .median()
                                       )
     
-    """# Uncomment to smooth amplitude stack to reduce noise.
-    preEventPeriod_asc = (ee.Image.cat(asc
-                                      .filter(preEventPeriod)
-                                      .median()
-                                      )
-                          .convolve(smooth_S1))
-    preEventPeriod_desc = (ee.Image.cat(desc
-                                      .filter(preEventPeriod)
-                                      .median())
-                                      .convolve(smooth_S1)
-                                      )
-    """
-    
     # Post-event amplitude without filter.
     postEventPeriod_asc = ee.Image.cat(asc
                                        .filter(postEventPeriod)
@@ -122,40 +109,38 @@ def I_Ratio(aoi, slope_threshold, curv_threshold,
     postEventPeriod_desc = ee.Image.cat(desc
                                        .filter(postEventPeriod)
                                        .median())
-    
-    """# Uncomment to filter post-event amplitude image as well.
-    postEventPeriod_asc = (ee.Image.cat(asc
-                                       .filter(postEventPeriod)
-                                       .median())
-                           .convolve(smooth_S1))
-    postEventPeriod_desc = (ee.Image.cat(desc
-                                       .filter(postEventPeriod)
-                                       .median())
-                           .convolve(smooth_S1))
-    """
-    
-    # Calculate the log ratio (using subtraction since data are in log scale)
-    # for Pre- and Post-event S1 SAR Backscatter.
-    Iratio_desc = preEventPeriod_desc.subtract(postEventPeriod_desc)
-    Iratio_desc = Iratio_desc.clip(aoi)
-    
-    Iratio_asc = preEventPeriod_asc.subtract(postEventPeriod_asc)
-    Iratio_asc = Iratio_asc.clip(aoi)
-    
-    Iratio_mean_desc_asc = (Iratio_asc.add(Iratio_desc)).divide(2)
-    
-    
-    I_ratio_mean_masked = Iratio_mean_desc_asc.updateMask(mask_slope).updateMask(mask_curvature).updateMask(waterMask) 
-    #I_ratio_mean_masked = Iratio_mean_desc_asc.updateMask(mask_slope).updateMask(mask_curvature)
+
+    # Errors will arise from lack of SAR data for a given time period, and the stack will be empty.
+    # Catch if any one of the stacks of empty and outpull a null value as the result.
+    # The test is whether there are even any bands within the image created from the stacks.
+    # Otherwise, if all the data is accounted for, proceed.
+    if not all([preEventPeriod_asc.bandNames().getInfo(),
+                postEventPeriod_asc.bandNames().getInfo(),
+                preEventPeriod_desc.bandNames().getInfo(),
+                postEventPeriod_desc.bandNames().getInfo()]):
+        pass
+    else:
+        # Calculate the log ratio (using subtraction since data are in log scale)
+        # for Pre- and Post-event S1 SAR Backscatter.
+        Iratio_desc = preEventPeriod_desc.subtract(postEventPeriod_desc)
+        Iratio_desc = Iratio_desc.clip(aoi)
+
+        Iratio_asc = preEventPeriod_asc.subtract(postEventPeriod_asc)
+        Iratio_asc = Iratio_asc.clip(aoi)
+
+        Iratio_mean_desc_asc = (Iratio_asc.add(Iratio_desc)).divide(2)
+
+
+        I_ratio_mean_masked = Iratio_mean_desc_asc.updateMask(mask_slope).updateMask(mask_curvature).updateMask(waterMask) 
+        #I_ratio_mean_masked = Iratio_mean_desc_asc.updateMask(mask_slope).updateMask(mask_curvature)
+
+        # Calculate percentiles of I_ratio. It is recommended to only use the 99th percentile.
+        I_ratio_Percentiles = I_ratio_mean_masked.reduceRegion(
+            reducer = ee.Reducer.percentile([90, 95, 99]),
+            geometry = aoi,
+            scale = 10,
+            bestEffort = True
+        )
+        I_ratio_99thPtile = I_ratio_mean_masked.gte(ee.Number(I_ratio_Percentiles.get("VH_p99")))
         
-    # Calculate percentiles of I_ratio. It is recommended to only use the 99th percentile.
-    I_ratio_Percentiles = I_ratio_mean_masked.reduceRegion(
-        reducer = ee.Reducer.percentile([90, 95, 99]),
-        geometry = aoi,
-        scale = 10,
-        bestEffort = True
-    )
-    I_ratio_99thPtile = I_ratio_mean_masked.gte(ee.Number(I_ratio_Percentiles.get("VH_p99")))
-    
-    
-    return I_ratio_99thPtile
+        return I_ratio_99thPtile
