@@ -408,9 +408,13 @@ exportToCSV_count.start()
 
 WindowDate_to_CSV(windowTimes, file_name, sizeWindows)
 
-
+"""
+Wait for export to finish in GEE before continuing!
+"""
 #########################################################################################################################
-
+"""
+When finished, save CSVs to same directory as notebook.
+"""
 
 detection_date_list = []
 detection_ID_list = []
