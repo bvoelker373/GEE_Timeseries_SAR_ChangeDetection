@@ -1,3 +1,5 @@
+- Please see *Usage.pdf* for full guidance on usage, and *Notebook.zip* for an explanatory Jupyter Notebook.
+
 # Overview
 These scripts use Google Earth Engine to process SAR data from the ESA Sentinel-1 satellite platform for the purpose of change detection of the Earth's surface. Two stacks of SAR intensity images are created that cover two different periods of time. The time period between the stacks is effectively the 'detection window' where, if a change occurs, it will be detected by the algorithm. 
 
